@@ -1,9 +1,9 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-
 from config.config import SMTP_SERVER, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, EMAIL_FROM, EMAIL_TO
 
+# montar corpo do email de forma mais interativa
 def montar_corpo_email(dataset, workspace, erro, sugestao):
     return f"""\
 <html>
@@ -98,7 +98,7 @@ def montar_corpo_email(dataset, workspace, erro, sugestao):
 </html>
 """
 
-
+# enviar email
 def enviar_email(assunto, corpo):
     msg = MIMEMultipart()
     msg["From"] = EMAIL_FROM
