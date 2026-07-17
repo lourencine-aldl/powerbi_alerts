@@ -1,14 +1,11 @@
-
-
 import pandas as pd
-
 from include.powerbi_client import (
     listar_workspaces,
     listar_datasets,
     obter_ultima_atualizacao,
     obter_descricao_erro,
 )
-
+#coletar os dados do servico do powerbi
 def coletar_datasets(headers):
     dados = []
 
@@ -56,7 +53,7 @@ def coletar_datasets(headers):
 
     return pd.DataFrame(dados)
 
-
+#tratar os dados em um df com as informacoes que precisamos e as devidas conversoes
 def tratar_dataframe(df):
     for coluna in ["Data Início", "Data Fim"]:
         df[coluna] = (
