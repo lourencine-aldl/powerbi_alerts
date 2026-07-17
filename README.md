@@ -1,10 +1,9 @@
-# Monitor de Falhas de Atualização do Power BI com IA
+# Gestão de Falhas de Atualização do Power BI com IA
 
 Desenvolvi um serviço simples que monitora a última atualização de todos os datasets do Power BI, identifica falhas e envia um alerta por e-mail contendo o erro encontrado e uma sugestão de correção gerada por um LLM.
 
 > No projeto de teor acadêmico utilizei a **Claude (Anthropic)**, mas a solução pode ser executda com qualquer outro modelo de IA.
 
----
 
 ## O que ele faz
 
@@ -19,7 +18,6 @@ Desenvolvi um serviço simples que monitora a última atualização de todos os 
   - Erro encontrado
   - Sugestão de correção
 
----
 
 ## Como Utilizar
 
@@ -31,7 +29,6 @@ Para acessar a API do Power BI é necessário criar um **Service Principal** no 
 
 Essas credenciais permitem que a aplicação acesse a API do Power BI de forma segura e sem depender de um usuário.
 
----
 
 ## Variáveis de ambiente (crie um arquivo `.env` na raiz do diretório)
 
