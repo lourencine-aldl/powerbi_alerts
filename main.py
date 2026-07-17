@@ -3,7 +3,7 @@ from include.collector import coletar_datasets, tratar_dataframe
 from include.claude_client import gerar_sugestao
 from include.email_sender import enviar_email, montar_corpo_email
 
-
+# processando os alertas chamando as funcoes
 def processar_alertas(df):
     falhas = df[df["Status Atualização"] == "Failed"]
 
@@ -24,18 +24,15 @@ def processar_alertas(df):
 
         print(f"Alerta enviado: {linha['Dataset']}")
 
-
+# funcao principal de execucao
 def main():
     headers = autenticar()
 
     df = coletar_datasets(headers)
     df = tratar_dataframe(df)
 
-    print(df)
-    #print(f"\nTotal de datasets: {len(df)}")
-
+    # print(df)
     processar_alertas(df)
-
-
+    
 if __name__ == "__main__":
     main()
