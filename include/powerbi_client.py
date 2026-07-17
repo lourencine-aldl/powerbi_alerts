@@ -4,9 +4,8 @@ import requests
 
 from config.config import TENANT_ID, CLIENT_ID, CLIENT_SECRET, BASE_URL
 
-
+#realizar a autenticacao com o token
 def autenticar():
-    """Gera o header de autenticação (Bearer token) via Service Principal."""
     url = f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token"
 
     resposta = requests.post(
@@ -22,17 +21,17 @@ def autenticar():
 
     return {"Authorization": f"Bearer {resposta.json()['access_token']}"}
 
-
+#listar os workspaces autorizados
 def listar_workspaces(headers):
     url = f"{BASE_URL}/groups"
     return requests.get(url, headers=headers).json()["value"]
 
-
+#listar os datasets
 def listar_datasets(workspace_id, headers):
     url = f"{BASE_URL}/groups/{workspace_id}/datasets"
     return requests.get(url, headers=headers).json()["value"]
 
-
+#capturar a ultima atualização do dataset
 def obter_ultima_atualizacao(workspace_id, dataset_id, headers):
     url = (
         f"{BASE_URL}/groups/{workspace_id}/datasets/"
@@ -47,9 +46,8 @@ def obter_ultima_atualizacao(workspace_id, dataset_id, headers):
     refreshes = resposta.json().get("value", [])
     return refreshes[0] if refreshes else {}
 
-
+# buscar os detalhes do erro
 def obter_descricao_erro(refresh):
-    """Extrai a mensagem de erro de um refresh que falhou."""
     if not refresh or refresh.get("status") != "Failed":
         return None
 
