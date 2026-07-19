@@ -44,18 +44,11 @@ class Settings:
 
 def get_settings() -> Settings:
     smtp_user = _required("SMTP_USER")
-    recipients = [
-        item.strip()
-        for item in _required("EMAIL_TO").split(",")
-        if item.strip()
-    ]
-
+    recipients = [item.strip() for item in _required("EMAIL_TO").split(",") if item.strip()]
     llm_enabled = _bool("LLM_ENABLED", True)
     anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
     if llm_enabled and not anthropic_api_key:
-        raise RuntimeError(
-            "ANTHROPIC_API_KEY é obrigatória quando LLM_ENABLED=true"
-        )
+        raise RuntimeError("ANTHROPIC_API_KEY é obrigatória quando LLM_ENABLED=true")
 
     return Settings(
         pbi_tenant_id=_required("PBI_TENANT_ID"),
@@ -76,3 +69,17 @@ def get_settings() -> Settings:
         email_from=os.getenv("EMAIL_FROM", smtp_user),
         email_to=recipients,
     )
+
+
+# Compatibilidade temporária com o cliente Power BI original.
+TENANT_ID = os.getenv("PBI_TENANT_ID")
+CLIENT_ID = os.getenv("PBI_CLIENT_ID")
+CLIENT_SECRET = os.getenv("PBI_CLIENT_SECRET")
+BASE_URL = os.getenv("PBI_BASE_URL", "https://api.powerbi.com/v1.0/myorg")
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com")
+SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+SMTP_USER = os.getenv("SMTP_USER")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+EMAIL_FROM = os.getenv("EMAIL_FROM", SMTP_USER)
+EMAIL_TO = os.getenv("EMAIL_TO")
