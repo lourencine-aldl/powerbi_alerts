@@ -1,0 +1,9 @@
+services:
+  powerbi-alerts:
+    build: .
+    container_name: powerbi-alerts
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    restart: "no"
